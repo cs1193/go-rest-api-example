@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  example-service:
+    build:
+      context: ./services
+      args:
+        - buildno=1
+    networks:
+      - example-api-network
+    depends_on:
+      - example-datastore
+    ports:
+      - 38141:8000
+
+  example-datastore:
+    build: ./datastore
+    networks:
+      - example-api-network
+
+networks:
+  example-api-network:
+
+volumes:
+  example-datastore-volume:
